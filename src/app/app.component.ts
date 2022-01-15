@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   title = 'rxjs-tutorial';
-
-  // ------------- Observable-------------------
   ngOnInit(): void {
+    this.metod1();
+    this.metod2();
+    
+  }
+  // ------------- Observable-------------------
+  metod1() {
     // Observable() ile bir akış oluşturuyoruz akış 
     // içindeki datalara erişmek için sonra subscribe olmamız gerekir. 
     // verinin türünü bildirmek istiyorsak Observable()<number> 
@@ -37,7 +41,7 @@ export class AppComponent implements OnInit {
     // const observer = function (data:any) {
     //   console.log(data);
     // }
-    
+
     // const observer = (data:any) => {
     //   console.log(data);
     // }
@@ -47,8 +51,16 @@ export class AppComponent implements OnInit {
     //   console.log(data);
     // })
 
+
+
   }
 
+  //  --------------------Subject---------------------------
+  metod2(){
+    // Bir observable a birden fazla observer tüketiyorsa buna Subject denir.
+    const subject = new Subject() 
+  }
+  
 
 
 }
