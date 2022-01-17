@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { asyncScheduler, AsyncSubject, BehaviorSubject, Observable, observeOn, ReplaySubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  title = 'rxjs-tutorial';
+export class AppComponent implements OnInit, AfterViewInit {
+
+  name = "";
+  
   ngOnInit(): void {
     // this.metod1();
-    this.metod2();
+    // this.metod2();
+    // this.metod3();
 
   }
   // ------------- Observable-------------------
@@ -53,9 +56,9 @@ export class AppComponent implements OnInit {
     //ornek:
   }
 
- 
+
   metod2() {
-     //  --------------------Subject---------------------------
+    //  --------------------Subject---------------------------
     // Bir observable a birden fazla observer tüketiyorsa buna Subject denir.
 
     // let data: any = "Hilmi";
@@ -63,11 +66,11 @@ export class AppComponent implements OnInit {
     // const subject = new BehaviorSubject(data);
     // const subject = new ReplaySubject(2);
     const subject = new AsyncSubject();
-    subject.subscribe(data=> console.log(`ObservableA ${data}`))
-    subject.subscribe(data=> console.log(`ObservableB ${data}`))
+    subject.subscribe(data => console.log(`ObservableA ${data}`))
+    subject.subscribe(data => console.log(`ObservableB ${data}`))
     subject.next(3);
     subject.next(5);
-    subject.subscribe(data=> console.log(`ObservableC ${data}`))
+    subject.subscribe(data => console.log(`ObservableC ${data}`))
     subject.next(7);
     subject.next(9);
     subject.complete();
@@ -82,6 +85,45 @@ export class AppComponent implements OnInit {
     //    akışta sonuncu veriyi anlayabimek için complate() fonksiyonunun tetiklenmesini bekler
     //    bu durumda sadece 9 gelir akıştan.
   }
+
+  metod3() {
+    //  -------------------- Scheduler---------------------------
+    // Bir akışın ne zaman başlayacağını  ve verinin ne zaman Observale lara ileteceğini kontrol eden nesnedir
+    //Scheduler, üç bileşenden oluşur.
+
+    //Execution Context = Görevin nerede ve ne zaman çalıştırılacağını (yürütüleceğini) gösterir.
+
+    // Execution Policy: Öncelik veya diğer ölçütlere göre görevlerin nasıl saklanacağı ve hangi sırayla alınacağından sorumludur.
+
+    // Clock: Scheduler’da bulunan now() getter metodu ile zaman kavramını verir. 
+    // Eğer bir scheduler, belirli bir zamanda bir işlem yapmak durumundaysa zaman kavramına ihtiyacı vardır.
+    console.log("Scheduler kullanılmayan ******");
+    const observable = new Observable(data=>{
+      data.next(1);
+      data.next(2);
+      data.next(3);
+      data.complete();
+    });
+    observable.subscribe(data=>console.log(data));
+    console.log("Scheduler kullanılmayan ******");
+    console.log("**********************************")
+    console.log("Scheduler kullanılan ******");
+    const observable2 = new Observable(data=>{
+      data.next(1);
+      data.next(2);
+      data.next(3);
+      data.complete()
+    }).pipe(observeOn(asyncScheduler));
+    observable.subscribe(data=>console.log(data));
+    console.log("Scheduler kullanılan ******");
+  }
+
+  ngAfterViewInit(): void {
+    asyncScheduler.schedule(()=>{
+      this.name = "Hilmi";
+    });
+  }
+
 
 
 
