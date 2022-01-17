@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RxjsObservableComponent } from './rxjs/rxjs-observable/rxjs-observable.component';
+import { RxjsSubjectComponent } from './rxjs/rxjs-subject/rxjs-subject.component';
+import { RxjsSchedulerComponent } from './rxjs/rxjs-scheduler/rxjs-scheduler.component';
+import { RxjsOperatorlerComponent } from './rxjs/rxjs-operatorler/rxjs-operatorler.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RxjsObservableComponent,
+    RxjsSubjectComponent,
+    RxjsSchedulerComponent,
+    RxjsOperatorlerComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
