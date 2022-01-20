@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { bindCallback, Observable } from 'rxjs';
+import { bindCallback, defer, from, Observable, of, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
 
@@ -39,9 +39,39 @@ export class RxjsOperatorlerComponent implements OnInit {
 
     // $.getJSON(this.url, (data: any) => console.log(data));
 
-    const obs: (url: string) => Observable<any[]> = bindCallback($.getJSON);
+    // const obs: (url: string) => Observable<any[]> = bindCallback($.getJSON);
 
-    obs(this.url).subscribe(data => console.log(data))
+    // obs(this.url).subscribe(data => console.log(data))
+
+    // ------
+
+    // defer operatörü = Elimizdeki herhangi bir observable nesnesine biz
+    //  subscribe oldumuz anda bu nesnenin oluşmasını istiyorsak defer operatörünü kullana biliriz
+
+    // const obs1 = of(new Date());
+    // const obs2 = defer(() => of(new Date()));
+
+    // timer(5000).subscribe(()=>{
+    //   obs1.subscribe(data => console.log("of(): ",data))
+    //   obs2.subscribe(data => console.log("defer() : ",data))
+    // })
+
+    // ------
+
+    // from operatörü = Herhangi bir diziyi alıp geriye observable döndüren bir operatördür.
+        const sayilar = [1,2,3];
+        const obs = from(sayilar);
+        obs.subscribe(data=>{
+          console.log("sayilar",data);
+        });
+
+        const cars = new Map<string,string>();
+        cars.set("Ford","Focus"); 
+        cars.set("Wolsvagen","Passat"); 
+        cars.set("Audi","A6"); 
+        cars.set("Fiat","Egea"); 
+        const obs2 = from(cars);
+        obs2.subscribe(data=>console.log("Cars",data))
 
   }
 
