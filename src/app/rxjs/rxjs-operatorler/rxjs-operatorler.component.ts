@@ -103,6 +103,10 @@ export class RxjsOperatorlerComponent implements OnInit {
     // const obs = interval(5000);
     // obs.subscribe(data=>console.log("Merhaba",data));
     
+    // of operatörü = Verilen herhangi bir türdeki değeri observable dönüştüren operatördür.
+
+    const obs = of(1,2,3,"Ahmet",[true,false]);
+    obs.subscribe(data=>console.log(data))
 
   }
 
