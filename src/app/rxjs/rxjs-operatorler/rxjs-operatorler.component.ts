@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { bindCallback, defer, from, fromEvent, generate, interval, Observable, of, range, throwError, timer } from 'rxjs';
+import { bindCallback, defer, from, fromEvent, generate, iif, interval, Observable, of, range, throwError, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
 
@@ -121,10 +121,18 @@ export class RxjsOperatorlerComponent implements OnInit {
     // thrrowError operaörü = Hiçbir öğe barındırmayan ve bir hata fırlatan  observable oluşturur.
     // throw(e)
 
-    throwError(new Error("Örnek bir hata")).subscribe(data=>console.log(data));
+    // throwError(new Error("Örnek bir hata")).subscribe(data=>console.log(data));
     
+    // timer operatörü = Milisaniye cinsinden belirtilen süre kadar sonra  akış  yayacak olan observable nesnesi dödürür
+    // timer(5000,1000).subscribe(data => console.log('Merhaba'));
 
+    //
 
+    // iif operatörü = iki observable arasında şarta bağlı seçim yapar.
+    // const state:boolean = true;
+    // const obs = iif(()=>state,of(1,3,5),of(10,11,12));
+    // obs.subscribe(data=> console.log(data));
+   
 
   }
 
