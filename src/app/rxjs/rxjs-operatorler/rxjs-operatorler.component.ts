@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { bindCallback, defer, from, fromEvent, generate, iif, interval, Observable, of, range, throwError, timer } from 'rxjs';
+import { bindCallback, concat, defer, from, fromEvent, generate, iif, interval, observable, Observable, of, range, throwError, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
@@ -150,6 +150,15 @@ export class RxjsOperatorlerComponent implements OnInit {
     // const combine = combineLatest(obs1, obs2, obs3);
     // combine.subscribe(data => console.log(data));
 
+    //
+
+    // concat operatörü = Verilen tüm observable ları sırayla yayan  observable oluşturur.
+
+    // const obs1 = of(1,2,3);
+    // const obs2 = of(4,5,6);
+    // const obs3 = of(7,8,9);
+    // const obss = concat(obs1,obs2,obs3);
+    // obss.subscribe(data=> console.log(data));
   }
 
 }
