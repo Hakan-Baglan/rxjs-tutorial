@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { bindCallback, defer, from, fromEvent, generate, Observable, of, timer } from 'rxjs';
+import { bindCallback, defer, from, fromEvent, generate, interval, Observable, of, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
 
@@ -90,9 +90,19 @@ export class RxjsOperatorlerComponent implements OnInit {
 
     // generate(1, x => x < 3, x => x + 1);
 
-    const obs = generate(100, x => x > 0,x => x - 3);
-    obs.subscribe(data=>console.log(data))
+    // const obs = generate(100, x => x > 0,x => x - 3);
+    // obs.subscribe(data=>console.log(data))
 
+    //
+
+    // interval operatorü = Belirtilen sayısal değere karşılık gelen 
+    // zaman aralığında periyot  oluşturan  bir operatördür*(sayısal değer milisaniye cinsinden olması gerekiyor.).
+
+    // interval(1000);
+
+    // const obs = interval(5000);
+    // obs.subscribe(data=>console.log("Merhaba",data));
+    
 
   }
 
