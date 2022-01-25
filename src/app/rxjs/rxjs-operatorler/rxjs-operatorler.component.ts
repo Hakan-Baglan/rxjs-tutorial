@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { bindCallback, defer, from, fromEvent, generate, iif, interval, Observable, of, range, throwError, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
+import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
 
 
@@ -16,7 +17,7 @@ export class RxjsOperatorlerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    //  --------------------Operatörler---------------------------
+    //  --------------------Creation--Operatörler---------------------------
     // ajax operatörü = Herhangi bir edpoint e yapılan bir istek 
     // neticesinde gelen sonuçları observable dödüren fonksiyondur.
 
@@ -102,7 +103,7 @@ export class RxjsOperatorlerComponent implements OnInit {
 
     // const obs = interval(5000);
     // obs.subscribe(data=>console.log("Merhaba",data));
-    
+
     // of operatörü = Verilen herhangi bir türdeki değeri observable dönüştüren operatördür.
 
     // const obs = of(1,2,3,"Ahmet",[true,false]);
@@ -122,7 +123,7 @@ export class RxjsOperatorlerComponent implements OnInit {
     // throw(e)
 
     // throwError(new Error("Örnek bir hata")).subscribe(data=>console.log(data));
-    
+
     // timer operatörü = Milisaniye cinsinden belirtilen süre kadar sonra  akış  yayacak olan observable nesnesi dödürür
     // timer(5000,1000).subscribe(data => console.log('Merhaba'));
 
@@ -132,7 +133,22 @@ export class RxjsOperatorlerComponent implements OnInit {
     // const state:boolean = true;
     // const obs = iif(()=>state,of(1,3,5),of(10,11,12));
     // obs.subscribe(data=> console.log(data));
-   
+
+    //  --------------------Join--Creation--Operatörler---------------------------
+
+    // const obs1 = of('A','B','C');
+    // const obs2 = of(5,10,15);
+    // const obs3 = of(1,2,3);
+
+    // const combine = combineLatest(obs1,obs2,obs3);
+    // combine.subscribe(data=> console.log(data));
+
+    // const obs1 = timer(1500, 1000);
+    // const obs2 = timer(500, 1000);
+    // const obs3 = timer(250, 1000);
+
+    // const combine = combineLatest(obs1, obs2, obs3);
+    // combine.subscribe(data => console.log(data));
 
   }
 
