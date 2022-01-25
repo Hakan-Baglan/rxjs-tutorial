@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { bindCallback, defer, from, fromEvent, generate, interval, Observable, of, range, timer } from 'rxjs';
+import { bindCallback, defer, from, fromEvent, generate, interval, Observable, of, range, throwError, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
 
@@ -113,8 +113,18 @@ export class RxjsOperatorlerComponent implements OnInit {
     // range operatörü = belirtilen bir aralıkta dizisel değer yayan operartördür.
     // range(1,3);
 
-    const obs = range(555,20);
-    obs.subscribe(data=>console.log(data))
+    // const obs = range(555,20);
+    // obs.subscribe(data=>console.log(data));
+
+    //
+
+    // thrrowError operaörü = Hiçbir öğe barındırmayan ve bir hata fırlatan  observable oluşturur.
+    // throw(e)
+
+    throwError(new Error("Örnek bir hata")).subscribe(data=>console.log(data));
+    
+
+
 
   }
 
