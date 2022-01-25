@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { bindCallback, defer, from, fromEvent, Observable, of, timer } from 'rxjs';
+import { bindCallback, defer, from, fromEvent, generate, Observable, of, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
 
@@ -81,9 +81,17 @@ export class RxjsOperatorlerComponent implements OnInit {
     // button.addEventListener("click",()=>{
     //   console.log("tıklandı");
     // })
-    const button = document.getElementsByTagName("button")[0];
-    const obs = fromEvent(button, "click");
-    obs.subscribe(a => console.log(a));
+    // const button = document.getElementsByTagName("button")[0];
+    // const obs = fromEvent(button, "click");
+    // obs.subscribe(a => console.log(a));
+
+    // 
+    // generate operatörü = Verilen şarta göre oluşturularak observable döndüren bir operatörü.
+
+    // generate(1, x => x < 3, x => x + 1);
+
+    const obs = generate(100, x => x > 0,x => x - 3);
+    obs.subscribe(data=>console.log(data))
 
 
   }
