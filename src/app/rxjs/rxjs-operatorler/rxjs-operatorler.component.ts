@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { bindCallback, defer, from, Observable, of, timer } from 'rxjs';
+import { bindCallback, defer, from, fromEvent, Observable, of, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
 
@@ -59,19 +59,32 @@ export class RxjsOperatorlerComponent implements OnInit {
     // ------
 
     // from operatörü = Herhangi bir diziyi alıp geriye observable döndüren bir operatördür.
-        const sayilar = [1,2,3];
-        const obs = from(sayilar);
-        obs.subscribe(data=>{
-          console.log("sayilar",data);
-        });
+    // const sayilar = [1,2,3];
+    // const obs = from(sayilar);
+    // obs.subscribe(data=>{
+    //   console.log("sayilar",data);
+    // });
 
-        const cars = new Map<string,string>();
-        cars.set("Ford","Focus"); 
-        cars.set("Wolsvagen","Passat"); 
-        cars.set("Audi","A6"); 
-        cars.set("Fiat","Egea"); 
-        const obs2 = from(cars);
-        obs2.subscribe(data=>console.log("Cars",data))
+    // const cars = new Map<string,string>();
+    // cars.set("Ford","Focus"); 
+    // cars.set("Wolsvagen","Passat"); 
+    // cars.set("Audi","A6"); 
+    // cars.set("Fiat","Egea"); 
+    // const obs2 = from(cars);
+    // obs2.subscribe(data=>console.log("Cars",data))
+
+    // fromEvent operatörü = Herhangi bir nesnenin belirtilen  event'ini yakalayarak 
+    // observable nesnesi olarak sunan operatördür.
+    // fromEvent(element,'click');
+
+    // const button = document.getElementsByTagName("button")[0];
+    // button.addEventListener("click",()=>{
+    //   console.log("tıklandı");
+    // })
+    const button = document.getElementsByTagName("button")[0];
+    const obs = fromEvent(button, "click");
+    obs.subscribe(a => console.log(a));
+
 
   }
 
