@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { bindCallback, concat, defer, forkJoin, from, fromEvent, generate, iif, interval, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer } from 'rxjs';
+import { bindCallback, concat, defer, forkJoin, from, fromEvent, generate, iif, interval, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
@@ -195,11 +195,20 @@ export class RxjsOperatorlerComponent implements OnInit {
 
     // race operatörü = ilk yayına başlayan observable abone olur.
 
-    const obs1 = interval(1000).pipe(mapTo("Ahmet"));
-    const obs2 = interval(500).pipe(mapTo("Mehmet"));
-    const obs3 = interval(2000).pipe(mapTo("Hilmi"));
+    // const obs1 = interval(1000).pipe(mapTo("Ahmet"));
+    // const obs2 = interval(500).pipe(mapTo("Mehmet"));
+    // const obs3 = interval(2000).pipe(mapTo("Hilmi"));
 
-    race(obs1, obs2, obs3).subscribe(data => console.log(data));
+    // race(obs1, obs2, obs3).subscribe(data => console.log(data));
+
+    //
+
+    // zip operatörü = Birder fazzla observable yayındaki dataları dizi olarak döndüren operatördür.
+
+    const obs1 = of(1, 2, 3);
+    const obs2 = of(4, 5, 6);
+    const obs3 = of(7, 8, 9);
+    zip(obs1, obs2, obs3).subscribe(data => console.log(data));
     
   }
 
