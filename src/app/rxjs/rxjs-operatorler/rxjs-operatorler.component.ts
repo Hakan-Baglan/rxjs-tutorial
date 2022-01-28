@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { audit, bindCallback, concat, defer, filter, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
+import { audit, auditTime, bindCallback, concat, defer, filter, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
@@ -222,12 +222,20 @@ export class RxjsOperatorlerComponent implements OnInit {
 
     //  --------------------Filtering-Operators---------------------------
 
-    //  audit operatörü = Bir süre için observable akışındaki değerler üzerinde işlem yapmamıza
+    // " audit" operatörü = Bir süre için observable akışındaki değerler üzerinde işlem yapmamıza
     // izin verir ve ardından en sonuncu(yeni) değerler yayınlar.
 
+    // const obs = interval(1000);
+    // const obs2 = obs.pipe(audit(x => interval(2000)),map(x => x + "değeri"));
+    // // obs.subscribe(data => console.log(data));
+    // obs2.subscribe(data => console.log(data));
+
+    //
+
+    // auditTime operatörü = audit operatörünün paremetreli halidir.
+
     const obs = interval(1000);
-    const obs2 = obs.pipe(audit(x => interval(2000)),map(x => x + "değeri"));
-    // obs.subscribe(data => console.log(data));
+    const obs2 = obs.pipe(auditTime(2000), map(x => x + "değeri"));
     obs2.subscribe(data => console.log(data));
   }
 
