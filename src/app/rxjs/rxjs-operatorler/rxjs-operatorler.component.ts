@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { bindCallback, concat, defer, forkJoin, from, fromEvent, generate, iif, interval, observable, Observable, of, range, throwError, timer } from 'rxjs';
+import { bindCallback, concat, defer, forkJoin, from, fromEvent, generate, iif, interval, merge, observable, Observable, of, partition, range, throwError, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
@@ -165,11 +165,31 @@ export class RxjsOperatorlerComponent implements OnInit {
     // forkJoin operatörü = Observable ların tamamlanmasını bekler
     //  ve sonra yayınlanan sonucu  değerlerin elde edilmesini sağlar.
 
-    const obs1 = of(1,2,3);
-    const obs2 = of(4,5,6);
-    const obs3 = of(7,8,9);
-    const obs4 = forkJoin(obs1,obs2,obs3);
-    obs4.subscribe(data=> console.log(data));
+    // const obs1 = of(1,2,3);
+    // const obs2 = of(4,5,6);
+    // const obs3 = of(7,8,9);
+    // const obs4 = forkJoin(obs1,obs2,obs3);
+    // obs4.subscribe(data=> console.log(data));
+
+    //
+
+    // merge operatörü = Observable ları birleştirerek tek  bir observable oluşturur.
+
+
+    // const obs1 = of('a','b','c');
+    // const obs2 = of(4,5,6);
+    // const obs4 = merge(obs1,obs2);
+    // obs4.subscribe(data=> console.log(data));
+
+    //
+
+    // partition operatörü = Observable ı belirli şarta göre, şartı 
+    // karşılayanlar ve karşılamayanlar olarak ikiyeye ayırır.
+
+    const obs1 = of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    const [obs2, obs3] = partition(obs1, x => x % 3 == 0);
+    obs2.subscribe(data => console.log(data));
+    obs3.subscribe(data => console.log(data));
 
   }
 
