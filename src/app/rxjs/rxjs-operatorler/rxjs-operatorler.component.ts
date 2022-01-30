@@ -290,8 +290,16 @@ export class RxjsOperatorlerComponent implements OnInit, AfterViewInit {
 
     // elementAt operatörü = akıştaki verilen değerlerden index numarası verileri döndüren operatördür.
 
-    const obs = of(1,2,3,4,234,231,12);
-    obs.pipe(elementAt(1)).subscribe(data => console.log(data))
+    // const obs = of(1,2,3,4,234,231,12);
+    // obs.pipe(elementAt(1)).subscribe(data => console.log(data))
+
+    // 
+
+    // filter operatörü = akıştaki verileri filterelemeye yarayan operatördür.
+
+    const obs = of("Abdullah","Kasım","Melih","Burak","İsmail","Eyüp").pipe(filter(el=>el.indexOf("a") === -1));
+    obs.subscribe(data => console.log(data));
+    
 
   }
 
