@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, filter, first, forkJoin, from, fromEvent, generate, ignoreElements, iif, interval, last, map, mapTo, merge, observable, Observable, of, partition, race, range, sample, sampleTime, throwError, timer, zip } from 'rxjs';
+import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, filter, first, forkJoin, from, fromEvent, generate, ignoreElements, iif, interval, last, map, mapTo, merge, observable, Observable, of, partition, race, range, sample, sampleTime, single, throwError, timer, zip } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
@@ -336,11 +336,19 @@ export class RxjsOperatorlerComponent implements OnInit, AfterViewInit {
     // sampleTime operatörü = Periyodik zaman aralıkları içinde bir
     //  observable tarafından  yayılan en son öğeyi getirir
 
-    const obs = fromEvent(document,'click');
-    const result = obs.pipe(sampleTime(1000));
-    result.subscribe(data => console.log(data));
+    // const obs = fromEvent(document,'click');
+    // const result = obs.pipe(sampleTime(1000));
+    // result.subscribe(data => console.log(data));
 
+    // single operatörü = Bu operatör neticesinde bildirilen şarta uygun 
+    // birdern fazla değer söz konusuysa hata verecek yahut herhangi bir değer yokfa-stack 'undifined'
+    // dönecektir. Verilen şarta uygun sade ve sadece tek bir değer döndürmelidir.
 
+    const obs = range(1, 10).pipe(single(x => x == 10));
+    obs.subscribe({
+      next: data => console.log(data),
+      error: err => console.log(err)
+    })
 
 
   }
