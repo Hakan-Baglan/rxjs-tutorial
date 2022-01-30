@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, filter, first, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
+import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, filter, first, forkJoin, from, fromEvent, generate, ignoreElements, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
@@ -7,9 +7,9 @@ import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combi
 
 declare var $: any;
 
-interface Person{
-  name:string;
-  age:number;
+interface Person {
+  name: string;
+  age: number;
 }
 @Component({
   selector: 'rxjs-operatorler',
@@ -266,7 +266,7 @@ export class RxjsOperatorlerComponent implements OnInit, AfterViewInit {
     // distinct operatörü = Akıştaki verilerden tekrar edenleri tekil olarak döndüren operatördür.
     // const obs = of("Halil","Halil","Hakan","Abdullah","Kasım","Kasım");
     // obs.pipe(distinct(x=> x)).subscribe(data => console.log(data)); 
- 
+
     // distinctUntilChanged operatörü = Akıştaki verileri değişiklik  olana kadar tekileştirilen  operatördür
 
     // distinctUntilKeyChanged operatörü = Akıştaki objelerden verilen key e anhtar değere göre
@@ -304,9 +304,19 @@ export class RxjsOperatorlerComponent implements OnInit, AfterViewInit {
 
     // first operatörü = akıştaki ilk değeri getiren operatördür.
 
-    const obs = of(1,2,3,4,234,231,12);
-    obs.pipe(first()).subscribe(data => console.log(data));
-    
+    // const obs = of(1,2,3,4,234,231,12);
+    // obs.pipe(first()).subscribe(data => console.log(data));
+
+    //
+
+    // ignoreElements operatörü = Observable tarafından yayılan tüm öğeleri yok sayar,görmezden gelir 
+    // yalnızca copmlete ve error çıktılarını yakalar.
+
+    const obs = of(1, 2, 3).pipe(ignoreElements());
+    obs.subscribe(data => console.log(data), error => console.log(error), () => {
+      console.log("the end");
+    })
+
 
   }
 
