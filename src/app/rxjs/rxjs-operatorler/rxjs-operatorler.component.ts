@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, filter, first, forkJoin, from, fromEvent, generate, ignoreElements, iif, interval, last, map, mapTo, merge, observable, Observable, of, partition, race, range, sample, throwError, timer, zip } from 'rxjs';
+import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, filter, first, forkJoin, from, fromEvent, generate, ignoreElements, iif, interval, last, map, mapTo, merge, observable, Observable, of, partition, race, range, sample, sampleTime, throwError, timer, zip } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
@@ -328,10 +328,18 @@ export class RxjsOperatorlerComponent implements OnInit, AfterViewInit {
 
     // sample operatörü = Periyodik zaman aralıkları  içinde bir observable yayılan  en son öğeyi yayar.
 
-    const second = interval(1000);
+    // const second = interval(1000);
+    // const obs = fromEvent(document,'click');
+    // const result = second.pipe(sample(obs));
+    // result.subscribe(data => console.log(data));
+
+    // sampleTime operatörü = Periyodik zaman aralıkları içinde bir
+    //  observable tarafından  yayılan en son öğeyi getirir
+
     const obs = fromEvent(document,'click');
-    const result = second.pipe(sample(obs));
+    const result = obs.pipe(sampleTime(1000));
     result.subscribe(data => console.log(data));
+
 
 
 
