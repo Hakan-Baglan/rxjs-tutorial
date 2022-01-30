@@ -1,11 +1,16 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, filter, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
+import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, filter, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
 
 
 declare var $: any;
+
+interface Person{
+  name:string;
+  age:number;
+}
 @Component({
   selector: 'rxjs-operatorler',
   templateUrl: './rxjs-operatorler.component.html',
@@ -259,10 +264,29 @@ export class RxjsOperatorlerComponent implements OnInit, AfterViewInit {
     // obs.pipe(debounceTime(250)).subscribe(data => console.log("Tıklandı..."));
 
     // distinct operatörü = Akıştaki verilerden tekrar edenleri tekil olarak döndüren operatördür.
-    const obs = of("Halil","Halil","Hakan","Abdullah","Kasım","Kasım");
-    obs.pipe(distinct(x=> x)).subscribe(data => console.log(data)); 
+    // const obs = of("Halil","Halil","Hakan","Abdullah","Kasım","Kasım");
+    // obs.pipe(distinct(x=> x)).subscribe(data => console.log(data)); 
  
     // distinctUntilChanged operatörü = Akıştaki verileri değişiklik  olana kadar tekileştirilen  operatördür
+
+    // distinctUntilKeyChanged operatörü = Akıştaki objelerden verilen key e anhtar değere göre
+    // dğişiklik olana kadar tekileştiren operatördür. 
+
+    const obs = of<Person[]>(
+      {age: 120,name: "Hilmi"},
+      {age: 10,name: "Hilmi"},
+      {age: 110,name: "Hilmi"},
+      {age: 30,name: "Kasım"},
+      {age: 370,name: "Kasım"},
+      {age: 70,name: "Hakan"},
+      {age: 730,name: "Kasım"},
+      {age: 30,name: "Kasım"},
+      {age: 140,name: "Abdullah"},
+      {age: 1120,name: "Abdullah"},
+      {age: 110,name: "Halil"}
+    );
+
+    obs.pipe(distinctUntilKeyChanged("name")).subscribe(data => console.log(data))
 
   }
 
