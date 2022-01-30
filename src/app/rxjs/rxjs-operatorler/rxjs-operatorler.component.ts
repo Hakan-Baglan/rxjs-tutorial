@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, filter, first, forkJoin, from, fromEvent, generate, ignoreElements, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
+import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, filter, first, forkJoin, from, fromEvent, generate, ignoreElements, iif, interval, last, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
@@ -312,10 +312,19 @@ export class RxjsOperatorlerComponent implements OnInit, AfterViewInit {
     // ignoreElements operatörü = Observable tarafından yayılan tüm öğeleri yok sayar,görmezden gelir 
     // yalnızca copmlete ve error çıktılarını yakalar.
 
-    const obs = of(1, 2, 3).pipe(ignoreElements());
-    obs.subscribe(data => console.log(data), error => console.log(error), () => {
-      console.log("the end");
-    })
+    // const obs = of(1, 2, 3).pipe(ignoreElements());
+    // obs.subscribe(data => console.log(data), error => console.log(error), () => {
+    //   console.log("the end");
+    // })
+
+    //
+
+    // last operatörü = Observable daki son değeri yayar.
+
+    const obs = of(1, 2, 3, 4, 234, 231, 12);
+    obs.pipe(last()).subscribe(data => console.log(data));
+
+
 
 
   }
