@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, filter, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
+import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, filter, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
@@ -272,21 +272,26 @@ export class RxjsOperatorlerComponent implements OnInit, AfterViewInit {
     // distinctUntilKeyChanged operatörü = Akıştaki objelerden verilen key e anhtar değere göre
     // dğişiklik olana kadar tekileştiren operatördür. 
 
-    const obs = of<Person[]>(
-      {age: 120,name: "Hilmi"},
-      {age: 10,name: "Hilmi"},
-      {age: 110,name: "Hilmi"},
-      {age: 30,name: "Kasım"},
-      {age: 370,name: "Kasım"},
-      {age: 70,name: "Hakan"},
-      {age: 730,name: "Kasım"},
-      {age: 30,name: "Kasım"},
-      {age: 140,name: "Abdullah"},
-      {age: 1120,name: "Abdullah"},
-      {age: 110,name: "Halil"}
-    );
+    // const obs = of<Person[]>(
+    //   {age: 120,name: "Hilmi"},
+    //   {age: 10,name: "Hilmi"},
+    //   {age: 110,name: "Hilmi"},
+    //   {age: 30,name: "Kasım"},
+    //   {age: 370,name: "Kasım"},
+    //   {age: 70,name: "Hakan"},
+    //   {age: 730,name: "Kasım"},
+    //   {age: 30,name: "Kasım"},
+    //   {age: 140,name: "Abdullah"},
+    //   {age: 1120,name: "Abdullah"},
+    //   {age: 110,name: "Halil"}
+    // );
 
-    obs.pipe(distinctUntilKeyChanged("name")).subscribe(data => console.log(data))
+    // obs.pipe(distinctUntilKeyChanged("name")).subscribe(data => console.log(data))
+
+    // elementAt operatörü = akıştaki verilen değerlerden index numarası verileri döndüren operatördür.
+
+    const obs = of(1,2,3,4,234,231,12);
+    obs.pipe(elementAt(1)).subscribe(data => console.log(data))
 
   }
 
