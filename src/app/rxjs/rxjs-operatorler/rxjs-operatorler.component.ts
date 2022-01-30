@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, filter, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
+import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, filter, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
@@ -255,10 +255,14 @@ export class RxjsOperatorlerComponent implements OnInit, AfterViewInit {
 
     // debounceTime operatörü = debonce operatörünün parametreli halidir.
 
-    const obs = fromEvent(document, 'click');
-    obs.pipe(debounceTime(250)).subscribe(data => console.log("Tıklandı..."));
+    // const obs = fromEvent(document, 'click');
+    // obs.pipe(debounceTime(250)).subscribe(data => console.log("Tıklandı..."));
 
-
+    // distinct operatörü = Akıştaki verilerden tekrar edenleri tekil olarak döndüren operatördür.
+    const obs = of("Halil","Halil","Hakan","Abdullah","Kasım","Kasım");
+    obs.pipe(distinct(x=> x)).subscribe(data => console.log(data)); 
+ 
+    // distinctUntilChanged operatörü = Akıştaki verileri değişiklik  olana kadar tekileştirilen  operatördür
 
   }
 
