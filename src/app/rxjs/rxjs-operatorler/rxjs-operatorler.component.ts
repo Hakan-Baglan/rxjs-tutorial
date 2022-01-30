@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { audit, auditTime, bindCallback, concat, defer, filter, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, filter, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
@@ -11,10 +11,18 @@ declare var $: any;
   templateUrl: './rxjs-operatorler.component.html',
   styleUrls: ['./rxjs-operatorler.component.scss']
 })
-export class RxjsOperatorlerComponent implements OnInit {
-
+export class RxjsOperatorlerComponent implements OnInit, AfterViewInit {
   url: string = "https://jsonplaceholder.typicode.com/posts";
   constructor() { }
+
+  @ViewChild('hakan') txt!: ElementRef;
+
+  ngAfterViewInit(): void {
+    const obs = fromEvent(this.txt.nativeElement, 'keyup');
+    obs.pipe(debounce(x => interval(100))).subscribe(data => console.log(data));
+  }
+
+
 
   ngOnInit(): void {
     //  --------------------Creation--Operatörler---------------------------
@@ -234,9 +242,24 @@ export class RxjsOperatorlerComponent implements OnInit {
 
     // auditTime operatörü = audit operatörünün paremetreli halidir.
 
-    const obs = interval(1000);
-    const obs2 = obs.pipe(auditTime(2000), map(x => x + "değeri"));
-    obs2.subscribe(data => console.log(data));
+    // const obs = interval(1000);
+    // const obs2 = obs.pipe(auditTime(2000), map(x => x + "değeri"));
+    // obs2.subscribe(data => console.log(data));
+
+    //
+
+    // debounce operatörü = Akıçtaki değerlerin zaman aşımı süresini belirleyebilmek için  kullanılan bir operatördür.
+
+    // const obs = fromEvent(document,'click');
+    // obs.pipe(debounce(x=> interval(250))).subscribe(data => console.log("Tıklandı..."));
+
+    // debounceTime operatörü = debonce operatörünün parametreli halidir.
+
+    const obs = fromEvent(document, 'click');
+    obs.pipe(debounceTime(250)).subscribe(data => console.log("Tıklandı..."));
+
+
+
   }
 
 }
