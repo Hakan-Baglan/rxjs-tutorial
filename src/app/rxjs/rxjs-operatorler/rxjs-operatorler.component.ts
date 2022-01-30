@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, filter, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
+import { audit, auditTime, bindCallback, concat, debounce, debounceTime, defer, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, filter, first, forkJoin, from, fromEvent, generate, iif, interval, map, mapTo, merge, observable, Observable, of, partition, race, range, throwError, timer, zip } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { combineLatest, combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 
@@ -297,8 +297,15 @@ export class RxjsOperatorlerComponent implements OnInit, AfterViewInit {
 
     // filter operatörü = akıştaki verileri filterelemeye yarayan operatördür.
 
-    const obs = of("Abdullah","Kasım","Melih","Burak","İsmail","Eyüp").pipe(filter(el=>el.indexOf("a") === -1));
-    obs.subscribe(data => console.log(data));
+    // const obs = of("Abdullah","Kasım","Melih","Burak","İsmail","Eyüp").pipe(filter(el=>el.indexOf("a") === -1));
+    // obs.subscribe(data => console.log(data));
+
+    //
+
+    // first operatörü = akıştaki ilk değeri getiren operatördür.
+
+    const obs = of(1,2,3,4,234,231,12);
+    obs.pipe(first()).subscribe(data => console.log(data));
     
 
   }
